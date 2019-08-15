@@ -6,7 +6,7 @@ import (
 	"github.com/labstack/echo"
 )
 
-// HealthCheck is the heath check function.
-func HealthCheck(c echo.Context) error {
-	return c.String(http.StatusOK, "WORKING\n")
+// Healthcheck is the heathcheck function.
+func Healthcheck(c echo.Context) error {
+	return c.String(http.StatusOK, "WORKING!\n")
 }
