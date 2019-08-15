@@ -1,3 +1,3 @@
-# huskyCI - Golang Vulnerabilities POC
+# huskyCI - Python Vulnerabilities POC
 
-> This branch is used as a huskyCI POC to find Golang vulnerabilities
+> This branch is used as a huskyCI POC to find Python vulnerabilities
