@@ -1,15 +1,3 @@
-.DS_Store
-.idea/
-.keep
-Godeps/_workspace
-.GOPATH
-#vendor
-coverage.txt
-c.out
-coverage.html
-*.pem
+node_modules/
 .env
-.vagrant
-huskyci
-dockers.env
-huskyci-client
+.ds_store
