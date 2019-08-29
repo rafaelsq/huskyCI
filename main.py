@@ -1,6 +1,6 @@
 secret = 'password123!'
 
-password = 'thisisnotapassword' # #nohusky
+password = 'thisisnotapassword' #nohusky
 
 command = 'print "this command is not secure!!"'
 
