@@ -6,6 +6,7 @@ package util_test
 
 import (
 	"os"
+	"time"
 
 	"github.com/globocom/huskyCI/api/util"
 
@@ -188,6 +189,77 @@ Line4`
 		Context("Bandit: When line number doesn't match the one in the code string", func() {
 			It("Should return false.", func() {
 				Expect(util.VerifyNoHusky(rawBanditCodeSliceString[0], rawLineNumberSliceInteger[0], rawSecurityToolSliceString[0])).To(BeFalse())
+			})
+		})
+	})
+
+	Describe("EndOfTheDay", func() {
+		var (
+			time_var      time.Time
+			time_expected time.Time
+			time_str      string
+		)
+
+		BeforeEach(func() {
+			time_str = "2019-09-12T11:45:26.371Z"
+		})
+		JustBeforeEach(func() {
+			time_var, _ = time.Parse(time.RFC3339, time_str)
+			time_expected, _ = time.Parse(time.RFC3339, "2019-09-12T23:59:59.000Z")
+		})
+
+		Context("with valid time input", func() {
+			It("Should return a valid end of the day time.", func() {
+				Expect(util.EndOfTheDay(time_var)).To(Equal(time_expected))
+			})
+		})
+	})
+
+	Describe("BeginningOfTheDay", func() {
+		var (
+			time_var      time.Time
+			time_expected time.Time
+			time_str      string
+		)
+
+		BeforeEach(func() {
+			time_str = "2019-09-12T11:45:26.371Z"
+		})
+
+		JustBeforeEach(func() {
+			time_var, _ = time.Parse(time.RFC3339, time_str)
+			time_expected, _ = time.Parse(time.RFC3339, "2019-09-12T00:00:00.000Z")
+		})
+
+		Context("with valid time input", func() {
+			It("Should return a valid beginning of the day time.", func() {
+				Expect(util.BeginningOfTheDay(time_var)).To(Equal(time_expected))
+			})
+		})
+	})
+
+	Describe("SliceContains", func() {
+		var (
+			set   []string
+			value string
+		)
+		BeforeEach(func() {
+			value = "contains"
+		})
+		JustBeforeEach(func() {
+			set = []string{"contains", "exists", "here"}
+		})
+		Context("with an existing value", func() {
+			It("should be true", func() {
+				Expect(util.SliceContains(set, value)).To(BeTrue())
+			})
+		})
+		Context("with a missing value", func() {
+			BeforeEach(func() {
+				value = "missing"
+			})
+			It("should be false", func() {
+				Expect(util.SliceContains(set, value)).To(BeFalse())
 			})
 		})
 	})
